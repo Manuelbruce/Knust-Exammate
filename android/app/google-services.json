@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "462685779344",
+    "project_id": "knustexammate",
+    "storage_bucket": "knustexammate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462685779344:android:f070ee7fd1fb5193cf6f15",
+        "android_client_info": {
+          "package_name": "com.example.knust_exammate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIHbvV4pD3WUbqDS34d3itmu9xpCW0jRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
