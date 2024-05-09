@@ -1,5 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:knust_exammate/firebase_options.dart';
+import 'package:knust_exammate/views/college_views/Profile_view.dart';
+import 'package:knust_exammate/views/college_views/cofagriandnature_view.dart';
+import 'package:knust_exammate/views/college_views/cofbuiltenviron_view.dart';
+import 'package:knust_exammate/views/college_views/cofengineering_view.dart';
+import 'package:knust_exammate/views/college_views/cofhandsc_view.dart';
+import 'package:knust_exammate/views/college_views/cofhealthsc_view.dart';
+import 'package:knust_exammate/views/editprofile_view.dart';
 import 'package:knust_exammate/views/login_view.dart';
 import 'package:knust_exammate/views/signup_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,8 +15,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:knust_exammate/constants/routes.dart';
 import 'package:knust_exammate/utilities/show_error_dialog.dart';
 import 'package:knust_exammate/views/verify_email_view.dart';
-
+import 'package:knust_exammate/utilities/navigation_bar.dart';
+import 'package:knust_exammate/views/college_view.dart';
 import 'college_views/cofscience_view.dart';
+
 
 
 void main() async {
@@ -21,6 +31,14 @@ void main() async {
         verifyEmailRoute: (context)  => VerifyEmailView(),
         mainAppRoute:(context) => MainAppView(),
         cofscienceRoute:(context) => CofScienceView(),
+        cofengineeringRoute: (context) => CofEngineeringView(),
+        cofhealthscRoute: (context) => CofHealthSciencesView(),
+        cofbuiltenvironRoute: (context) => CofBuiltEnvironmentView(),
+        cofhandscRoute: (context) => CofHumanitiesandSocailSciencesView(),
+        cofagriandnatureRoute: (context) => CofAgricultureandNatureView(),
+        profileRoute: (context) => ProfileView(),
+        collegeRoute: (context) => CollegeView(),
+        editprofileRoute: (context) => EditProfileView(),
       }
   ));
 }
@@ -41,6 +59,7 @@ class HomePage extends StatelessWidget {
               if (user != null) {
                 if (user.emailVerified) {
                   print('Email is Verified');
+
                 } else {
                   return const VerifyEmailView();
                 }
@@ -48,12 +67,14 @@ class HomePage extends StatelessWidget {
                 return LoginView();
               }
               return const MainAppView();
+              // return const MainAppView();
             default:
               return const CircularProgressIndicator();
           }
         }
 
     );
+
   }
 }
 
@@ -68,329 +89,60 @@ class MainAppView extends StatefulWidget {
 }
 
 class _MainAppViewState extends State<MainAppView> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    CollegeView(),
+    ProfileView(),
+
+  ];
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      backgroundColor: Colors.white,
-    body: SafeArea(
-      bottom: true,
-      child:  SingleChildScrollView(
-        child: Column(
-
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0,left: 10.0),
-                  child: Icon(Icons.account_balance,
-                  color:  Color(0xff008080),
-                  size: 45.0,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0, top:10.0),
-                  child: Text('Colleges',
-                    style: TextStyle(
-                      fontFamily: 'NunitoSans',
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xff008080)
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height:30.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35.0),
-                  color: Colors.teal.withOpacity(0.6),
-                ),
-                padding: const EdgeInsets.all(10),
-                height: 90.0,
-               child: Row(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Image.asset(
-                     'images/atomicon.png', // Adjust the path accordingly
-                     height: 100, // Adjust the height as needed
-                   ),
-                   const SizedBox(
-                     width: 10,
-                   ),
-                   Padding(
-                     padding: const EdgeInsets.only(top:17.0),
-                     child: Text('College of Science',
-                       style: TextStyle(
-                         fontFamily: 'NunitoSans',
-                         fontSize:25.0,
-                         fontWeight: FontWeight.bold,
-                          //color: Colors.white
-                       ),
-
-                     ),
-                   )
-                 ],
-               ),
-              ),
-            ),
-            SizedBox(height:15.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35.0),
-                  color: Colors.teal.withOpacity(0.6),
-                ),
-                padding: const EdgeInsets.all(10),
-                height: 90.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'images/engineeringicon.png', // Adjust the path accordingly
-                      height: 70, // Adjust the height as needed
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:17.0),
-                      child: Text('College of Engineering',
-                        style: TextStyle(
-                          fontFamily: 'NunitoSans',
-                          fontSize:25.0,
-                          fontWeight: FontWeight.bold,
-                          //color: Colors.white
-                        ),
-
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height:15.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35.0),
-                  color: Colors.teal.withOpacity(0.6),
-                ),
-                padding: const EdgeInsets.all(10),
-                height: 90.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'images/icons8-caduceus-100.png', // Adjust the path accordingly
-                      height: 70, // Adjust the height as needed
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:17.0),
-                      child: Text('College of Health Sciences',
-                        style: TextStyle(
-                          fontFamily: 'NunitoSans',
-                          fontSize:22.0,
-                          fontWeight: FontWeight.bold,
-                          //color: Colors.white
-                        ),
-
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height:15.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35.0),
-                  color: Colors.teal.withOpacity(0.6),
-                ),
-                padding: const EdgeInsets.all(10),
-                height: 90.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'images/articon.png', // Adjust the path accordingly
-                      height: 70, // Adjust the height as needed
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:5.0),
-                      child: Column(
-                        children: [
-                          Text('College of  ',
-                            style: TextStyle(
-                              fontFamily: 'NunitoSans',
-                              fontSize:22.0,
-                              fontWeight: FontWeight.bold,
-                              //color: Colors.white
-                            ),
-
-                          ),
-                          Text('Art and Built Environment ',
-                            style: TextStyle(
-                              fontFamily: 'NunitoSans',
-                              fontSize:22.0,
-                              fontWeight: FontWeight.bold,
-                              //color: Colors.white
-                            ),
-
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height:15.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35.0),
-                  color: Colors.teal.withOpacity(0.6),
-                ),
-                padding: const EdgeInsets.all(10),
-                height: 90.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'images/social-science.png', // Adjust the path accordingly
-                      height: 70, // Adjust the height as needed
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:5.0),
-                      child: Column(
-                        children: [
-                          Text('College of Humanities',
-                            style: TextStyle(
-                              fontFamily: 'NunitoSans',
-                              fontSize:22.0,
-                              fontWeight: FontWeight.bold,
-                              //color: Colors.white
-                            ),
-
-                          ),
-                          Text('and Social Sciences',
-                            style: TextStyle(
-                              fontFamily: 'NunitoSans',
-                              fontSize:22.0,
-                              fontWeight: FontWeight.bold,
-                              //color: Colors.white
-                            ),
-
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height:15.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35.0),
-                  color: Colors.teal.withOpacity(0.6),
-                ),
-                padding: const EdgeInsets.all(10),
-                height: 90.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'images/agric.png', // Adjust the path accordingly
-                      height: 70, // Adjust the height as needed
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:5.0),
-                      child: Column(
-                        children: [
-                          Text('College of Agriculture',
-                            style: TextStyle(
-                              fontFamily: 'NunitoSans',
-                              fontSize:22.0,
-                              fontWeight: FontWeight.bold,
-                              //color: Colors.white
-                            ),
-
-                          ),
-                          Text('and Natural Resources',
-                            style: TextStyle(
-                              fontFamily: 'NunitoSans',
-                              fontSize:22.0,
-                              fontWeight: FontWeight.bold,
-                              //color: Colors.white
-                            ),
-
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      )
+    return Scaffold(
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
 
+        selectedItemColor: Colors.white,
+        selectedLabelStyle: TextStyle(
+          color: Colors.white
+        ),
+        backgroundColor:  Colors.teal,
+        elevation: 0,
+        currentIndex: _selectedIndex,
+        onTap: (value) {
+          setState(() {
+            _selectedIndex = value;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              'images/collegewhite.png',
+              height: 24.0,
+            ),
+            icon: Image.asset(
+              'images/college.png',
+              height: 24.0,
+            ),
+            label: "Colleges",
 
-    // appBar: AppBar(
-    //   backgroundColor: Color(0xff008080),
-    //   actions: [
-    //     PopupMenuButton<MenuAction>(
-    //         onSelected: (value) async {
-    //           switch (value) {
-    //             case MenuAction.logout:
-    //               final shouldLogout = await showLogOutDialog(
-    //                   context);
-    //               if (shouldLogout) {
-    //                 await FirebaseAuth.instance.signOut();
-    //                 Navigator.of(context).pushNamedAndRemoveUntil(
-    //                   loginRoute,
-    //                       (route) => false,
-    //                 );
-    //               }
-    //           }
-    //         },
-    //         itemBuilder: (context) {
-    //           return [
-    //             const PopupMenuItem<MenuAction>(
-    //                 value: MenuAction.logout,
-    //                 child: Text('Log out')
-    //             ),
-    //           ];
-    //         }
-    //     )
-    //   ],
-    //
-    // ),
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              'images/profilewhite.png',
+              height: 24.0,
+            ),
+            icon: Image.asset(
+              'images/profileteal.png',
+              height: 24.0,
+            ),
+            label: "Profile",
+          ),
+        ],
+      ),
     );
   }
 }
