@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:knust_exammate/firebase_options.dart';
+import 'package:knust_exammate/views/aboutpage_view.dart';
 import 'package:knust_exammate/views/college_views/Profile_view.dart';
 import 'package:knust_exammate/views/college_views/cofagriandnature_view.dart';
 import 'package:knust_exammate/views/college_views/cofbuiltenviron_view.dart';
@@ -39,6 +40,7 @@ void main() async {
         profileRoute: (context) => ProfileView(),
         collegeRoute: (context) => CollegeView(),
         editprofileRoute: (context) => EditProfileView(),
+        aboutpageRoute: (context) =>  AboutPageView(),
       }
   ));
 }
