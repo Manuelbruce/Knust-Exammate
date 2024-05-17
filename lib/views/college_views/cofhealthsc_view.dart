@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:knust_exammate/views/main.dart';
+import 'package:knust_exammate/views/others_%20view/main.dart';
 
 class CofHealthSciencesView extends StatefulWidget {
   const CofHealthSciencesView({super.key});

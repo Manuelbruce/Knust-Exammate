@@ -46,6 +46,7 @@ class AboutPageView extends StatelessWidget {
                 height: 15,
               ),
               Container(
+                padding: EdgeInsets.all(9.0),
                 child: Text(
                     'KNUST Exam mate is a mobile application platform that allows anyone to have access to passed questions , simulate examination conditions and track their progress.'
                     ' With KNUST Exam Mate anyone can have access to various past questions from any course KNUST has to offer , whether  Engineering,'

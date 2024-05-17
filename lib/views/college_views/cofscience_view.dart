@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:knust_exammate/views/main.dart';
+import 'package:knust_exammate/views/others_%20view/main.dart';
 
 class CofScienceView extends StatefulWidget {
   const CofScienceView({super.key});
@@ -9,60 +9,156 @@ class CofScienceView extends StatefulWidget {
 }
 
 class _CofScienceViewState extends State<CofScienceView> {
+  final List<Map<String, dynamic>> _allUsers = [
+    { "name": "Computer Science" },
+    { "name": "Actuarial Science" },
+    { "name": "Mathematics" },
+    { "name": "Food Science and Technology" },
+    { "name": "Environmental Science" },
+    { "name": "Optometry" },
+    { "name": "Chemistry" },
+    { "name": "Information Technology" },
+    { "name": "Statistics" },
+    { "name": "Meteorology and Climate Science" },
+    { "name": "Biochemistry" },
+    { "name": "Theoretical and Applied Chemistry" },
+  ];
+
+  List<Map<String, dynamic>> _foundUsers = [];
+
+  @override
+  void initState() {
+    _foundUsers = _allUsers;
+    super.initState();
+  }
+
+  // This function is called whenever the text field changes
+  void _runFilter(String enteredKeyword) {
+    List<Map<String, dynamic>> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = _allUsers;
+    } else {
+      results = _allUsers.where((user) =>
+          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase())).toList();
+    }
+
+    setState(() {
+      _foundUsers = results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-        body: SafeArea(
-            bottom: true,
-            child: SingleChildScrollView(
-
-              child: Column(
+      body: SafeArea(
+        bottom: true,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0, top: 5),
+              child: Row(
                 children: [
-
-                  Padding(
-                    padding: const EdgeInsets.only(left:5.0,top: 5),
-                    child: Row(
-                      children: [
-                        IconButton(onPressed: (){
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => const MainAppView()));
-                        }, icon: Icon(Icons.arrow_back,
-                        size: 30,),
-                          style: IconButton.styleFrom(
-                            foregroundColor: Colors.teal
-                          ),
-                        ),
-                        SizedBox(width:5.0),
-                        Image.asset(
-                          'images/atomicon.png', // Adjust the path accordingly
-                          height: 50, // Adjust the height as needed
-                        ),
-                        SizedBox(width:5.0),
-                        Text('College of Science',
-                          style: TextStyle(
-                              fontFamily: 'NunitoSans',
-                              fontSize: 30.0,
-                              // fontWeight: FontWeight.w900,
-                              color: Color(0xff008080)
-                          ),
-                        ),
-                      ],
-                    ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MainAppView()));
+                    },
+                    icon: Icon(Icons.arrow_back, size: 30),
+                    style: IconButton.styleFrom(foregroundColor: Colors.teal),
                   ),
-                  SizedBox(height: 20,),
-                  Text('Programmes',
+                  SizedBox(width: 5.0),
+                  Image.asset(
+                    'images/atomicon.png', // Adjust the path accordingly
+                    height: 50, // Adjust the height as needed
+                  ),
+                  SizedBox(width: 5.0),
+                  Text(
+                    'College of Science',
                     style: TextStyle(
-                        fontFamily: 'NunitoSans',
-                        fontSize: 30.0,
-                         fontWeight: FontWeight.w900,
-                        color: Color(0xff008080)
+                      fontFamily: 'NunitoSans',
+                      fontSize: 30.0,
+                      color: Color(0xff008080),
                     ),
                   ),
                 ],
               ),
-
-            )
-        )
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Programmes',
+              style: TextStyle(
+                fontFamily: 'NunitoSans',
+                fontSize: 30.0,
+                fontWeight: FontWeight.w900,
+                color: Color(0xff008080),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 10),
+              child: TextField(
+                onChanged: (value) => _runFilter(value),
+                decoration: InputDecoration(
+                  labelText: 'Search',
+                  labelStyle: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'NunitoSans',
+                    fontWeight: FontWeight.bold,
+                  ),
+                  filled: true,
+                  fillColor: Colors.teal.withOpacity(0.7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 15),
+            // Use a Container or SizedBox with a specific height
+            Expanded(
+              child: _foundUsers.isNotEmpty
+                  ? ListView.builder(
+                itemCount: _foundUsers.length,
+                itemBuilder: (context, index) => Container(
+                  height: 100,
+                  margin: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
+                  child: Card(
+                    key: ValueKey(_foundUsers[index]["name"]),
+                    color: Color(0xff008080),
+                    elevation: 4,
+                    child: Center(
+                      child: ListTile(
+                        title: Text(
+                          _foundUsers[index]['name'],
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                            fontFamily: 'NunitoSans',
+                          //  fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                                  ),
+                                )
+                  : const Text(
+                'No results found',
+                style: TextStyle(fontSize: 24,
+                  color: Colors.teal,
+                  fontFamily: 'NunitoSans',
+                   fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

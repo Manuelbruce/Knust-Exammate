@@ -6,16 +6,16 @@ import 'package:knust_exammate/views/college_views/cofbuiltenviron_view.dart';
 import 'package:knust_exammate/views/college_views/cofengineering_view.dart';
 import 'package:knust_exammate/views/college_views/cofhandsc_view.dart';
 import 'package:knust_exammate/views/college_views/cofhealthsc_view.dart';
-import 'package:knust_exammate/views/login_view.dart';
-import 'package:knust_exammate/views/signup_view.dart';
+import 'package:knust_exammate/views/others_%20view/login_view.dart';
+import 'package:knust_exammate/views/others_%20view/signup_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:knust_exammate/constants/routes.dart';
 import 'package:knust_exammate/utilities/show_error_dialog.dart';
-import 'package:knust_exammate/views/verify_email_view.dart';
+import 'package:knust_exammate/views/others_%20view/verify_email_view.dart';
 import 'package:knust_exammate/utilities/navigation_bar.dart';
 
-import 'college_views/cofscience_view.dart';
+import 'cofscience_view.dart';
 
 class CollegeView extends StatefulWidget {
   const CollegeView({super.key});

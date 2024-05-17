@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:knust_exammate/views/college_view.dart';
+import 'package:knust_exammate/views/college_views/college_view.dart';
 import 'package:knust_exammate/views/college_views/Profile_view.dart';
-import 'package:knust_exammate/views/main.dart';
+import 'package:knust_exammate/views/others_%20view/main.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});

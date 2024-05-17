@@ -1,24 +1,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:knust_exammate/firebase_options.dart';
-import 'package:knust_exammate/views/aboutpage_view.dart';
+import 'package:knust_exammate/views/others_%20view/aboutpage_view.dart';
 import 'package:knust_exammate/views/college_views/Profile_view.dart';
 import 'package:knust_exammate/views/college_views/cofagriandnature_view.dart';
 import 'package:knust_exammate/views/college_views/cofbuiltenviron_view.dart';
 import 'package:knust_exammate/views/college_views/cofengineering_view.dart';
 import 'package:knust_exammate/views/college_views/cofhandsc_view.dart';
 import 'package:knust_exammate/views/college_views/cofhealthsc_view.dart';
-import 'package:knust_exammate/views/editprofile_view.dart';
-import 'package:knust_exammate/views/login_view.dart';
-import 'package:knust_exammate/views/signup_view.dart';
+import 'package:knust_exammate/views/others_%20view/login_view.dart';
+import 'package:knust_exammate/views/others_%20view/signup_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:knust_exammate/constants/routes.dart';
 import 'package:knust_exammate/utilities/show_error_dialog.dart';
-import 'package:knust_exammate/views/verify_email_view.dart';
+import 'package:knust_exammate/views/others_%20view/verify_email_view.dart';
 import 'package:knust_exammate/utilities/navigation_bar.dart';
-import 'package:knust_exammate/views/college_view.dart';
-import 'college_views/cofscience_view.dart';
+import 'package:knust_exammate/views/college_views/college_view.dart';
+import '../college_views/cofscience_view.dart';
 
 
 
@@ -39,7 +38,6 @@ void main() async {
         cofagriandnatureRoute: (context) => CofAgricultureandNatureView(),
         profileRoute: (context) => ProfileView(),
         collegeRoute: (context) => CollegeView(),
-        editprofileRoute: (context) => EditProfileView(),
         aboutpageRoute: (context) =>  AboutPageView(),
       }
   ));
