@@ -1,49 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:knust_exammate/views/others_%20view/main.dart';
-import 'package:knust_exammate/views/program_view/programDetail_view.dart';
+import 'package:knust_exammate/views/others_%20view/startTest_view.dart';
 
-class CofScienceView extends StatefulWidget {
-  const CofScienceView({super.key});
+class ProgramDetailView extends StatefulWidget {
+  final String programName;
+  final List<String> courses;
+
+  const ProgramDetailView({
+    Key? key,
+    required this.programName,
+    required this.courses,
+  }) : super(key: key);
 
   @override
-  State<CofScienceView> createState() => _CofScienceViewState();
+  State<ProgramDetailView> createState() => _ProgramDetailViewState();
 }
 
-class _CofScienceViewState extends State<CofScienceView> {
-  final List<Map<String, dynamic>> _allUsers = [
-    {"name": "Computer Science", "courses": ["Principles of Management", "Data Structures", "Algorithms"]},
-    {"name": "Actuarial Science", "courses": ["Probability", "Statistics", "Risk Management"]},
-    {"name": "Mathematics", "courses": ["Calculus", "Linear Algebra", "Abstract Algebra"]},
-    {"name": "Food Science and Technology", "courses": ["Food Chemistry", "Food Safety", "Food Engineering"]},
-    {"name": "Environmental Science", "courses": ["Ecology", "Environmental Policy", "Climate Science"]},
-    {"name": "Optometry", "courses": ["Visual Optics", "Ocular Disease", "Clinical Optometry"]},
-    {"name": "Chemistry", "courses": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry"]},
-    {"name": "Information Technology", "courses": ["IT Fundamentals", "Network Security", "Database Management"]},
-    {"name": "Statistics", "courses": ["Descriptive Statistics", "Inferential Statistics", "Statistical Computing"]},
-    {"name": "Meteorology and Climate Science", "courses": ["Weather Analysis", "Climate Change", "Atmospheric Physics"]},
-    {"name": "Biochemistry", "courses": ["Molecular Biology", "Genetics", "Proteomics"]},
-    {"name": "Theoretical and Applied Chemistry", "courses": ["Quantum Chemistry", "Spectroscopy", "Chemical Kinetics"]},
-  ];
-
-  List<Map<String, dynamic>> _foundUsers = [];
+class _ProgramDetailViewState extends State<ProgramDetailView> {
+  List<String> _foundCourses = [];
 
   @override
   void initState() {
-    _foundUsers = _allUsers;
+    _foundCourses = widget.courses;
     super.initState();
   }
 
   void _runFilter(String enteredKeyword) {
-    List<Map<String, dynamic>> results = [];
+    List<String> results = [];
     if (enteredKeyword.isEmpty) {
-      results = _allUsers;
+      results = widget.courses;
     } else {
-      results = _allUsers.where((user) =>
-          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase())).toList();
+      results = widget.courses
+          .where((course) => course.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
     }
 
     setState(() {
-      _foundUsers = results;
+      _foundCourses = results;
     });
   }
 
@@ -61,19 +53,14 @@ class _CofScienceViewState extends State<CofScienceView> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MainAppView()));
+                      Navigator.pop(context);
                     },
                     icon: Icon(Icons.arrow_back, size: 30),
                     style: IconButton.styleFrom(foregroundColor: Colors.teal),
                   ),
                   SizedBox(width: 5.0),
-                  Image.asset(
-                    'images/atomicon.png', // Adjust the path accordingly
-                    height: 50, // Adjust the height as needed
-                  ),
-                  SizedBox(width: 5.0),
                   Text(
-                    'College of Science',
+                    widget.programName,
                     style: TextStyle(
                       fontFamily: 'NunitoSans',
                       fontSize: 30.0,
@@ -85,7 +72,7 @@ class _CofScienceViewState extends State<CofScienceView> {
             ),
             SizedBox(height: 20),
             Text(
-              'Programmes',
+              'Courses',
               style: TextStyle(
                 fontFamily: 'NunitoSans',
                 fontSize: 30.0,
@@ -123,32 +110,29 @@ class _CofScienceViewState extends State<CofScienceView> {
             ),
             SizedBox(height: 15),
             Expanded(
-              child: _foundUsers.isNotEmpty
+              child: _foundCourses.isNotEmpty
                   ? ListView.builder(
-                itemCount: _foundUsers.length,
-                itemBuilder: (context, index) => Container(
-                  height: 100,
-                  margin: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProgramDetailView(
-                            programName: _foundUsers[index]['name'],
-                            courses: List<String>.from(_foundUsers[index]['courses']),
-                          ),
-                        ),
-                      );
-                    },
+                itemCount: _foundCourses.length,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StartTestView(courseName: _foundCourses[index]),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 100,
+                    margin: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
                     child: Card(
-                      key: ValueKey(_foundUsers[index]["name"]),
+                      key: ValueKey(_foundCourses[index]),
                       color: Color(0xff008080),
                       elevation: 4,
                       child: Center(
                         child: ListTile(
                           title: Text(
-                            _foundUsers[index]['name'],
+                            _foundCourses[index],
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.white,
@@ -163,7 +147,8 @@ class _CofScienceViewState extends State<CofScienceView> {
               )
                   : const Text(
                 'No results found',
-                style: TextStyle(fontSize: 24,
+                style: TextStyle(
+                  fontSize: 24,
                   color: Colors.teal,
                   fontFamily: 'NunitoSans',
                   fontWeight: FontWeight.bold,

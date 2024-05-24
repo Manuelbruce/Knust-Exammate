@@ -13,7 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:knust_exammate/constants/routes.dart';
 import 'package:knust_exammate/utilities/show_error_dialog.dart';
 import 'package:knust_exammate/views/others_%20view/verify_email_view.dart';
-import 'package:knust_exammate/utilities/navigation_bar.dart';
+
 
 import 'cofscience_view.dart';
 

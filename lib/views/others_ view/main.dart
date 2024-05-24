@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:knust_exammate/firebase_options.dart';
+import 'package:knust_exammate/utilities/db_connect.dart';
 import 'package:knust_exammate/views/others_%20view/aboutpage_view.dart';
 import 'package:knust_exammate/views/college_views/Profile_view.dart';
 import 'package:knust_exammate/views/college_views/cofagriandnature_view.dart';
@@ -15,13 +16,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:knust_exammate/constants/routes.dart';
 import 'package:knust_exammate/utilities/show_error_dialog.dart';
 import 'package:knust_exammate/views/others_%20view/verify_email_view.dart';
-import 'package:knust_exammate/utilities/navigation_bar.dart';
+
 import 'package:knust_exammate/views/college_views/college_view.dart';
 import '../college_views/cofscience_view.dart';
 
 
 
 void main() async {
+  var db= DBconnect();
+  db.addQuestion(Question(course:'Principles of Management ',id: '20', title: 'What is 20 x 100?', options: {
+    '100': false,
+    '200': true,
+    '300': false,
+    '500' : false,
+  }
+  ));
+
+
   runApp(MaterialApp(
 
     home:  HomePage(),
