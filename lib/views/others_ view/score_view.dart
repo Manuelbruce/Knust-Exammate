@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:knust_exammate/utilities/db_connect.dart';
+import 'package:knust_exammate/views/college_views/college_view.dart';
 import 'review_answers_view.dart';
-import 'package:knust_exammate/views/program_view/programDetail_view.dart';
+import 'package:knust_exammate/views/others_ view/testview.dart';
 
 class ScoreView extends StatelessWidget {
   final String course;
@@ -9,6 +10,7 @@ class ScoreView extends StatelessWidget {
   final int totalQuestions;
   final Map<String, bool> answers;
   final List<Question> questions;
+  final int duration;
 
   const ScoreView({
     Key? key,
@@ -17,61 +19,146 @@ class ScoreView extends StatelessWidget {
     required this.totalQuestions,
     required this.answers,
     required this.questions,
+    required this.duration,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Score - $course'),
-        backgroundColor: Colors.teal,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Your Score: $score / $totalQuestions',
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: 'NunitoSans',
-                color: Colors.teal,
-                fontWeight: FontWeight.bold,
+      backgroundColor: Color(0xff008080),
+
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top:75.0,left: 20,right: 20),
+
+          child: Container(
+            height:570,
+            width: 600,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              elevation: 4,
+              child: Column(
+                children: [
+                  const SizedBox(height: 50),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
+                      course,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontFamily: 'NunitoSans',
+                        color: Color(0xff008080),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    'Your Score: ',
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontFamily: 'NunitoSans',
+                      color:  Color(0xff008080),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+              Text(
+                ' $score / $totalQuestions',
+                style: TextStyle(
+                  fontSize: 60,
+                  fontFamily: 'NunitoSans',
+                  color:  Color(0xff008080),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TestView(
+                            course: course,
+                            duration: duration,
+                          ),
+                        ),
+                      );
+                    },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xff008080),
+                        padding: EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    child: Text('Retake Test',
+                    style:TextStyle(
+                        color: Colors.white,
+                      fontFamily: 'NunitoSans',
+                      fontWeight: FontWeight.bold,
+                    )
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ReviewAnswersView(
+                            questions: questions,
+                            answers: answers,
+
+                          ),
+                        ),
+                      );
+                    },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xff008080),
+                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    child: Text('Review Answers',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'NunitoSans',
+                      fontWeight: FontWeight.bold,
+                    )),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CollegeView()
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff008080),
+                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Text('Return Home',
+                        style:TextStyle(
+                            color: Colors.white,
+                          fontFamily: 'NunitoSans',
+                          fontWeight: FontWeight.bold,
+                        )
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProgramDetailView(
-                      programName: course,
-                      courses: [], // Placeholder, replace with actual course data
-                    ),
-                  ),
-                );
-              },
-              child: Text('Retake Test'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ReviewAnswersView(
-                      questions: questions,
-                      answers: answers,
-                    ),
-                  ),
-                );
-              },
-              child: Text('Review Answers'),
-            ),
-          ],
+          ),
         ),
       ),
     );

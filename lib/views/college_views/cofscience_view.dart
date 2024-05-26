@@ -11,7 +11,7 @@ class CofScienceView extends StatefulWidget {
 
 class _CofScienceViewState extends State<CofScienceView> {
   final List<Map<String, dynamic>> _allUsers = [
-    {"name": "Computer Science", "courses": ["Principles of Management", "Data Structures", "Algorithms"]},
+    {"name": "Computer Science", "courses": ["Principles of Management", "Data Structures", "Introduction to Programming with C++"]},
     {"name": "Actuarial Science", "courses": ["Probability", "Statistics", "Risk Management"]},
     {"name": "Mathematics", "courses": ["Calculus", "Linear Algebra", "Abstract Algebra"]},
     {"name": "Food Science and Technology", "courses": ["Food Chemistry", "Food Safety", "Food Engineering"]},

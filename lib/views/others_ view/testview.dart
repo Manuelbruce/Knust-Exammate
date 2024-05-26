@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:async'; // Import the Timer package
+import 'dart:async';
 import 'package:knust_exammate/utilities/db_connect.dart';
 import 'score_view.dart';
 
 class TestView extends StatefulWidget {
   final String course;
-  final int duration; // Duration in minutes
+  final int duration;
 
   const TestView({
     Key? key,
@@ -21,10 +21,10 @@ class _TestViewState extends State<TestView> {
   late Future<List<Question>> _questionsFuture;
   List<Question> _questions = [];
   int _currentQuestionIndex = 0;
-  Map<String, String> _selectedAnswers = {}; // Store the selected answers
-  late int _remainingTimeInSeconds; // Store the remaining time in seconds
-  late Timer _timer; // Timer o
-  // bject
+  Map<String, String> _selectedAnswers = {};
+  late int _remainingTimeInSeconds;
+  late Timer _timer;
+
   String _formatTime(int seconds) {
     final minutes = (seconds / 60).floor();
     final remainingSeconds = seconds % 60;
@@ -35,20 +35,20 @@ class _TestViewState extends State<TestView> {
   void initState() {
     super.initState();
     _questionsFuture = _fetchQuestions();
-    _remainingTimeInSeconds = widget.duration * 60; // Convert duration from minutes to seconds
+    _remainingTimeInSeconds = widget.duration * 60;
     _startTimer();
   }
 
   @override
   void dispose() {
-    _timer.cancel(); // Cancel the timer when the widget is disposed
+    _timer.cancel();
     super.dispose();
   }
 
   Future<List<Question>> _fetchQuestions() async {
     final dbConnect = DBconnect();
     final questions = await dbConnect.getQuestionsByCourse(widget.course);
-    questions.shuffle(); // Randomize questions
+    questions.shuffle();
     return questions;
   }
 
@@ -59,7 +59,7 @@ class _TestViewState extends State<TestView> {
           _remainingTimeInSeconds--;
         } else {
           _timer.cancel();
-          _finishTest(); // Auto-finish the test when time is up
+          _finishTest();
         }
       });
     });
@@ -67,7 +67,7 @@ class _TestViewState extends State<TestView> {
 
   void _selectAnswer(String questionId, String option) {
     setState(() {
-      _selectedAnswers[questionId] = option; // Store the selected answer
+      _selectedAnswers[questionId] = option;
     });
   }
 
@@ -98,6 +98,7 @@ class _TestViewState extends State<TestView> {
           totalQuestions: _questions.length,
           answers: _evaluateAnswers(),
           questions: _questions,
+          duration: widget.duration,
         ),
       ),
     );
@@ -128,15 +129,16 @@ class _TestViewState extends State<TestView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(' ${widget.course}',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          fontFamily: 'NunitoSans',
-          fontWeight: FontWeight.w900
+        title: Text(
+          '${widget.course}',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontFamily: 'NunitoSans',
+            fontWeight: FontWeight.w900,
+          ),
         ),
-        ),
-        backgroundColor: Colors.teal,
+        backgroundColor: Color(0xff008080),
       ),
       body: FutureBuilder<List<Question>>(
         future: _questionsFuture,
@@ -168,12 +170,12 @@ class _TestViewState extends State<TestView> {
           child: Text(
             question.title,
             style: TextStyle(
-              fontSize: 24, fontFamily: 'NunitoSans',
-            fontWeight: FontWeight.w900
+              fontSize: 24,
+              fontFamily: 'NunitoSans',
+              fontWeight: FontWeight.w900,
             ),
           ),
         ),
-        // Display the timer
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
@@ -186,7 +188,7 @@ class _TestViewState extends State<TestView> {
           return GestureDetector(
             onTap: () => _selectAnswer(question.id, option),
             child: Card(
-              color: isSelected ? Colors.teal : Colors.white, // Only highlight the selected answer
+              color: isSelected ? Colors.teal : Colors.white,
               child: ListTile(
                 title: Text(
                   option,
@@ -194,43 +196,50 @@ class _TestViewState extends State<TestView> {
                     color: isSelected ? Colors.white : Colors.black,
                     fontSize: 18,
                     fontFamily: 'NunitoSans',
-                    fontWeight: FontWeight.w900
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
           );
         }).toList(),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (_currentQuestionIndex > 0)
               ElevatedButton(
                 onPressed: _previousQuestion,
-                child: Text('Previous',
-                style: TextStyle(
-                  color: Color(0xff008080)
-                ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: _currentQuestionIndex == _questions.length - 1
-                    ? _finishTest
-                    : _nextQuestion,
                 child: Text(
-                    _currentQuestionIndex == _questions.length - 1 ? 'Finish' : 'Next',
+                  'Previous',
+                  style: TextStyle(
+                    color: Color(0xff008080)
+                  ),
+                ),
+
+              ),
+            if (_currentQuestionIndex < _questions.length - 1)
+              ElevatedButton(
+                onPressed: _nextQuestion,
+                child: Text(
+                  'Next',
                   style: TextStyle(
                       color: Color(0xff008080)
                   ),
                 ),
               ),
-            ],
-          ),
+            if (_currentQuestionIndex == _questions.length - 1)
+              ElevatedButton(
+                onPressed: _finishTest,
+                child: Text(
+                  'Finish',
+                  style: TextStyle(
+                      color: Color(0xff008080)
+                  ),
+                ),
+              ),
+          ],
         ),
       ],
     );
   }
-
 }
-

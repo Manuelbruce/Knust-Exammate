@@ -10,6 +10,7 @@ import 'package:knust_exammate/views/college_views/cofengineering_view.dart';
 import 'package:knust_exammate/views/college_views/cofhandsc_view.dart';
 import 'package:knust_exammate/views/college_views/cofhealthsc_view.dart';
 import 'package:knust_exammate/views/others_%20view/login_view.dart';
+import 'package:knust_exammate/views/others_%20view/score_view.dart';
 import 'package:knust_exammate/views/others_%20view/signup_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,14 +25,13 @@ import '../college_views/cofscience_view.dart';
 
 void main() async {
   var db= DBconnect();
-  db.addQuestion(Question(course:'Principles of Management ',id: '20', title: 'What is 20 x 100?', options: {
-    '100': false,
-    '200': true,
-    '300': false,
-    '500' : false,
-  }
-  ));
 
+// db.addQuestion(Question(course: 'Introduction to Programming with C++', id: '20', title: 'Which of the following is a logical operator in C++?', options: {
+// '&&': false,
+// '||': false,
+// '!': false,
+// 'All of the above': true,
+// }));
 
   runApp(MaterialApp(
 
@@ -50,6 +50,7 @@ void main() async {
         profileRoute: (context) => ProfileView(),
         collegeRoute: (context) => CollegeView(),
         aboutpageRoute: (context) =>  AboutPageView(),
+
       }
   ));
 }

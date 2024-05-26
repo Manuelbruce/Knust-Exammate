@@ -11,3 +11,4 @@ const cofbuiltenvironRoute = '/cofbuiltenviron/';
 const profileRoute = '/profile/';
 const collegeRoute = '/colleges/';
 const aboutpageRoute = '/aboutPage/';
+const scoreviewRoute = '/scoreview/';

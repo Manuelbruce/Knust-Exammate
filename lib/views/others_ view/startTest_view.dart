@@ -24,7 +24,7 @@ class _StartTestViewState extends State<StartTestView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 5.0, top: 5),
+              padding: const EdgeInsets.only(left: 5.0, top: 15),
               child: Row(
                 children: [
                   IconButton(
@@ -61,7 +61,7 @@ class _StartTestViewState extends State<StartTestView> {
               style: TextStyle(
                   fontFamily: 'NunitoSans',
                   fontSize: 18.0,
-                  color: Colors.teal,
+                  color: Color(0xff008080),
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
