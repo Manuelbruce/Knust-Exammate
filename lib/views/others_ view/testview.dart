@@ -19,9 +19,9 @@ class TestView extends StatefulWidget {
 
 class _TestViewState extends State<TestView> {
   late Future<List<Question>> _questionsFuture;
-  List<Question> _questions = [];
+  late List<Question> _questions;
   int _currentQuestionIndex = 0;
-  Map<String, String> _selectedAnswers = {};
+  Map<int, String> _selectedAnswers = {};
   late int _remainingTimeInSeconds;
   late Timer _timer;
 
@@ -65,9 +65,9 @@ class _TestViewState extends State<TestView> {
     });
   }
 
-  void _selectAnswer(String questionId, String option) {
+  void _selectAnswer(int questionIndex, String option) {
     setState(() {
-      _selectedAnswers[questionId] = option;
+      _selectedAnswers[questionIndex] = option;
     });
   }
 
@@ -96,7 +96,7 @@ class _TestViewState extends State<TestView> {
           course: widget.course,
           score: score,
           totalQuestions: _questions.length,
-          answers: _evaluateAnswers(),
+          answers: _selectedAnswers, // Pass the correct type
           questions: _questions,
           duration: widget.duration,
         ),
@@ -106,22 +106,13 @@ class _TestViewState extends State<TestView> {
 
   int _calculateScore() {
     int score = 0;
-    _selectedAnswers.forEach((questionId, selectedOption) {
-      Question question = _questions.firstWhere((q) => q.id == questionId);
+    _selectedAnswers.forEach((questionIndex, selectedOption) {
+      Question question = _questions[questionIndex];
       if (question.options[selectedOption] == true) {
         score++;
       }
     });
     return score;
-  }
-
-  Map<String, bool> _evaluateAnswers() {
-    Map<String, bool> evaluatedAnswers = {};
-    _selectedAnswers.forEach((questionId, selectedOption) {
-      Question question = _questions.firstWhere((q) => q.id == questionId);
-      evaluatedAnswers[questionId] = question.options[selectedOption]!;
-    });
-    return evaluatedAnswers;
   }
 
   @override
@@ -130,7 +121,7 @@ class _TestViewState extends State<TestView> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          '${widget.course}',
+          widget.course,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -160,7 +151,7 @@ class _TestViewState extends State<TestView> {
 
   Widget _buildQuestionView() {
     final question = _questions[_currentQuestionIndex];
-    final selectedOption = _selectedAnswers[question.id];
+    final selectedOption = _selectedAnswers[_currentQuestionIndex];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -186,7 +177,7 @@ class _TestViewState extends State<TestView> {
         ...question.options.keys.map((option) {
           final bool isSelected = selectedOption == option;
           return GestureDetector(
-            onTap: () => _selectAnswer(question.id, option),
+            onTap: () => _selectAnswer(_currentQuestionIndex, option),
             child: Card(
               color: isSelected ? Colors.teal : Colors.white,
               child: ListTile(
@@ -211,20 +202,15 @@ class _TestViewState extends State<TestView> {
                 onPressed: _previousQuestion,
                 child: Text(
                   'Previous',
-                  style: TextStyle(
-                    color: Color(0xff008080)
-                  ),
+                  style: TextStyle(color: Color(0xff008080)),
                 ),
-
               ),
             if (_currentQuestionIndex < _questions.length - 1)
               ElevatedButton(
                 onPressed: _nextQuestion,
                 child: Text(
                   'Next',
-                  style: TextStyle(
-                      color: Color(0xff008080)
-                  ),
+                  style: TextStyle(color: Color(0xff008080)),
                 ),
               ),
             if (_currentQuestionIndex == _questions.length - 1)
@@ -232,9 +218,7 @@ class _TestViewState extends State<TestView> {
                 onPressed: _finishTest,
                 child: Text(
                   'Finish',
-                  style: TextStyle(
-                      color: Color(0xff008080)
-                  ),
+                  style: TextStyle(color: Color(0xff008080)),
                 ),
               ),
           ],

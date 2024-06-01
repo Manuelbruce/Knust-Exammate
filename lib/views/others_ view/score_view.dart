@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:knust_exammate/utilities/db_connect.dart';
 import 'package:knust_exammate/views/college_views/college_view.dart';
 import 'review_answers_view.dart';
-import 'package:knust_exammate/views/others_ view/testview.dart';
+import 'testview.dart';
 
 class ScoreView extends StatelessWidget {
   final String course;
   final int score;
   final int totalQuestions;
-  final Map<String, bool> answers;
+  final Map<int, String> answers; // Changed to Map<int, String>
   final List<Question> questions;
   final int duration;
 
@@ -26,13 +26,11 @@ class ScoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff008080),
-
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top:75.0,left: 20,right: 20),
-
+          padding: const EdgeInsets.only(top: 75.0, left: 20, right: 20),
           child: Container(
-            height:570,
+            height: 570,
             width: 600,
             child: Card(
               shape: RoundedRectangleBorder(
@@ -61,19 +59,19 @@ class ScoreView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 50,
                       fontFamily: 'NunitoSans',
-                      color:  Color(0xff008080),
+                      color: Color(0xff008080),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-              Text(
-                ' $score / $totalQuestions',
-                style: TextStyle(
-                  fontSize: 60,
-                  fontFamily: 'NunitoSans',
-                  color:  Color(0xff008080),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+                  Text(
+                    ' $score / $totalQuestions',
+                    style: TextStyle(
+                      fontSize: 60,
+                      fontFamily: 'NunitoSans',
+                      color: Color(0xff008080),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
@@ -87,19 +85,20 @@ class ScoreView extends StatelessWidget {
                         ),
                       );
                     },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff008080),
-                        padding: EdgeInsets.symmetric(horizontal: 45, vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff008080),
+                      padding: EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    child: Text('Retake Test',
-                    style:TextStyle(
+                    ),
+                    child: Text(
+                      'Retake Test',
+                      style: TextStyle(
                         color: Colors.white,
-                      fontFamily: 'NunitoSans',
-                      fontWeight: FontWeight.bold,
-                    )
+                        fontFamily: 'NunitoSans',
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -111,33 +110,32 @@ class ScoreView extends StatelessWidget {
                           builder: (context) => ReviewAnswersView(
                             questions: questions,
                             answers: answers,
-
                           ),
                         ),
                       );
                     },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff008080),
-                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff008080),
+                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    child: Text('Review Answers',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'NunitoSans',
-                      fontWeight: FontWeight.bold,
-                    )),
+                    ),
+                    child: Text(
+                      'Review Answers',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'NunitoSans',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => CollegeView()
-                        ),
+                        MaterialPageRoute(builder: (context) => CollegeView()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -147,12 +145,13 @@ class ScoreView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: Text('Return Home',
-                        style:TextStyle(
-                            color: Colors.white,
-                          fontFamily: 'NunitoSans',
-                          fontWeight: FontWeight.bold,
-                        )
+                    child: Text(
+                      'Return Home',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'NunitoSans',
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

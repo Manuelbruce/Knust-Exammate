@@ -56,15 +56,18 @@ class _ProgramDetailViewState extends State<ProgramDetailView> {
                       Navigator.pop(context);
                     },
                     icon: Icon(Icons.arrow_back, size: 30),
-                    style: IconButton.styleFrom(foregroundColor: Colors.teal),
+                    color: Colors.teal,
                   ),
                   SizedBox(width: 5.0),
-                  Text(
-                    widget.programName,
-                    style: TextStyle(
-                      fontFamily: 'NunitoSans',
-                      fontSize: 30.0,
-                      color: Color(0xff008080),
+                  Expanded(
+                    child: Text(
+                      widget.programName,
+                      style: TextStyle(
+                        fontFamily: 'NunitoSans',
+                        fontSize: 25.0,
+                        color: Color(0xff008080),
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
@@ -88,7 +91,7 @@ class _ProgramDetailViewState extends State<ProgramDetailView> {
                 decoration: InputDecoration(
                   labelText: 'Search',
                   labelStyle: TextStyle(
-                    color: Colors.teal,
+                    color: Color(0xff008080),
                     fontFamily: 'NunitoSans',
                     fontWeight: FontWeight.bold,
                   ),
@@ -103,7 +106,7 @@ class _ProgramDetailViewState extends State<ProgramDetailView> {
                   ),
                   suffixIcon: Icon(
                     Icons.search,
-                    color: Colors.teal,
+                    color: Color(0xff008080),
                   ),
                 ),
               ),
@@ -149,7 +152,7 @@ class _ProgramDetailViewState extends State<ProgramDetailView> {
                 'No results found',
                 style: TextStyle(
                   fontSize: 24,
-                  color: Colors.teal,
+                  color: Color(0xff008080),
                   fontFamily: 'NunitoSans',
                   fontWeight: FontWeight.bold,
                 ),

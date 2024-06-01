@@ -20,36 +20,38 @@ import 'package:knust_exammate/views/others_%20view/verify_email_view.dart';
 
 import 'package:knust_exammate/views/college_views/college_view.dart';
 import '../college_views/cofscience_view.dart';
-
+import 'dart:convert';
 
 
 void main() async {
   var db= DBconnect();
+  db.addQuestion(Question(course: 'Programming with C++', id: '43', title: 'What is the value of `a` after the following code executes? `int a = 5; a++;`', options: {
+    '4': false,
+    '5': false,
+    '6': true,
+    '7': false,
+  }));
 
-// db.addQuestion(Question(course: 'Introduction to Programming with C++', id: '20', title: 'Which of the following is a logical operator in C++?', options: {
-// '&&': false,
-// '||': false,
-// '!': false,
-// 'All of the above': true,
-// }));
+
 
   runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
 
-    home:  HomePage(),
+    home:  const HomePage(),
       routes: {
       signupRoute :(context)=>  SignInView(),
       loginRoute: (context) => LoginView(),
-        verifyEmailRoute: (context)  => VerifyEmailView(),
-        mainAppRoute:(context) => MainAppView(),
-        cofscienceRoute:(context) => CofScienceView(),
-        cofengineeringRoute: (context) => CofEngineeringView(),
-        cofhealthscRoute: (context) => CofHealthSciencesView(),
-        cofbuiltenvironRoute: (context) => CofBuiltEnvironmentView(),
-        cofhandscRoute: (context) => CofHumanitiesandSocailSciencesView(),
-        cofagriandnatureRoute: (context) => CofAgricultureandNatureView(),
-        profileRoute: (context) => ProfileView(),
-        collegeRoute: (context) => CollegeView(),
-        aboutpageRoute: (context) =>  AboutPageView(),
+        verifyEmailRoute: (context)  => const VerifyEmailView(),
+        mainAppRoute:(context) => const MainAppView(),
+        cofscienceRoute:(context) => const CofScienceView(),
+        cofengineeringRoute: (context) => const CofEngineeringView(),
+        cofhealthscRoute: (context) => const CofHealthSciencesView(),
+        cofbuiltenvironRoute: (context) => const CofBuiltEnvironmentView(),
+        cofhandscRoute: (context) => const CofHumanitiesandSocailSciencesView(),
+        cofagriandnatureRoute: (context) => const CofAgricultureandNatureView(),
+        profileRoute: (context) => const ProfileView(),
+        collegeRoute: (context) => const CollegeView(),
+        aboutpageRoute: (context) =>  const AboutPageView(),
 
       }
   ));
@@ -118,7 +120,7 @@ class _MainAppViewState extends State<MainAppView> {
         type: BottomNavigationBarType.fixed,
 
         selectedItemColor: Colors.white,
-        selectedLabelStyle: TextStyle(
+        selectedLabelStyle: const TextStyle(
           color: Colors.white
         ),
         backgroundColor:  Colors.teal,
