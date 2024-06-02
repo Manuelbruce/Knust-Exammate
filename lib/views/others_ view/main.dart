@@ -25,12 +25,10 @@ import 'dart:convert';
 
 void main() async {
   var db= DBconnect();
-  db.addQuestion(Question(course: 'Programming with C++', id: '43', title: 'What is the value of `a` after the following code executes? `int a = 5; a++;`', options: {
-    '4': false,
-    '5': false,
-    '6': true,
-    '7': false,
-  }));
+
+
+
+
 
 
 

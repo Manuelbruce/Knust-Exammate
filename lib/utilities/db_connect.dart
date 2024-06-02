@@ -81,11 +81,7 @@ class DBconnect {
           print('Data is Map<String, dynamic>');
           return data.entries.map((entry) {
             final options = entry.value['options'];
-            final decodedOptions = options is Map
-                ? (options as Map<String, dynamic>).map((key, value) {
-              return MapEntry(key, value as bool);
-            })
-                : <String, bool>{};
+            final decodedOptions = _decodeOptions(options);
 
             return Question(
               id: entry.key,
@@ -103,6 +99,16 @@ class DBconnect {
     } catch (e) {
       print('Error getting questions: $e');
       throw e;
+    }
+  }
+
+  Map<String, bool> _decodeOptions(dynamic options) {
+    if (options is Map<String, dynamic>) {
+      return options.map((key, value) {
+        return MapEntry(decodeKey(key), value as bool);
+      });
+    } else {
+      return <String, bool>{};
     }
   }
 

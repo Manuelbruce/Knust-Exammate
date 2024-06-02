@@ -17,7 +17,6 @@ class _StartTestViewState extends State<StartTestView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -51,19 +50,21 @@ class _StartTestViewState extends State<StartTestView> {
               Text(
                 'You are about to start a test on ${widget.courseName}.',
                 style: TextStyle(
-                    fontFamily: 'NunitoSans',
-                    fontSize: 24.0,
-                    color: Color(0xff008080),
-                    fontWeight: FontWeight.bold),
+                  fontFamily: 'NunitoSans',
+                  fontSize: 24.0,
+                  color: Color(0xff008080),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(height: 20),
               Text(
-                'You can set you prefered time for this test below.The time cannot be set above 120 minutes',
+                'You can set your preferred time for this test below. The time cannot be set above 120 minutes or below 1 minute.',
                 style: TextStyle(
-                    fontFamily: 'NunitoSans',
-                    fontSize: 18.0,
-                    color: Color(0xff008080),
-                    fontWeight: FontWeight.bold),
+                  fontFamily: 'NunitoSans',
+                  fontSize: 18.0,
+                  color: Color(0xff008080),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(height: 20),
               TextField(
@@ -89,10 +90,10 @@ class _StartTestViewState extends State<StartTestView> {
               ),
               SizedBox(height: 20),
               Center(
-                child:ElevatedButton(
+                child: ElevatedButton(
                   onPressed: () {
                     int duration = int.tryParse(_timeController.text) ?? 120; // Default: 120 minutes
-                    if (duration <= 120) {
+                    if (duration <= 120 && duration >= 1) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -103,6 +104,10 @@ class _StartTestViewState extends State<StartTestView> {
                         ),
                       );
                     } else {
+                      String errorMessage = duration > 120
+                          ? "You cannot set the time above 120 minutes."
+                          : "You cannot set the time below 1 minute.";
+
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -114,7 +119,7 @@ class _StartTestViewState extends State<StartTestView> {
                               ),
                             ),
                             content: Text(
-                              "You cannot set the time above 120 minutes.",
+                              errorMessage,
                               style: TextStyle(
                                 color: Color(0xff008080),
                               ),
@@ -124,7 +129,8 @@ class _StartTestViewState extends State<StartTestView> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text("OK",
+                                child: Text(
+                                  "OK",
                                   style: TextStyle(
                                     color: Color(0xff008080),
                                   ),
@@ -152,7 +158,6 @@ class _StartTestViewState extends State<StartTestView> {
                     ),
                   ),
                 ),
-        
               ),
             ],
           ),

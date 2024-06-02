@@ -35,16 +35,15 @@ class ReviewAnswersView extends StatelessWidget {
                 itemCount: questions.length,
                 itemBuilder: (context, index) {
                   final question = questions[index];
-                  final correctOption = question.options.entries
-                      .firstWhere((entry) => entry.value)
-                      .key;
+                  final correctOptionEntry = question.options.entries.firstWhere((entry) => entry.value, orElse: () => MapEntry('', false));
+                  final correctOption = correctOptionEntry.key;
                   final userAnswer = answers[index];
-        
+
                   return Card(
                     margin: EdgeInsets.all(10.0),
                     child: ListTile(
                       title: Text(
-                        question.title,
+                        question.title ?? 'No Title',
                         style: TextStyle(
                           fontSize: 20,
                           fontFamily: 'NunitoSans',
@@ -56,7 +55,7 @@ class ReviewAnswersView extends StatelessWidget {
                         children: question.options.keys.map((option) {
                           final isCorrect = option == correctOption;
                           final isUserAnswer = userAnswer != null && option == userAnswer;
-        
+
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5.0),
                             child: Text(

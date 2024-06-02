@@ -29,6 +29,15 @@ class _LoginViewState extends State<LoginView> {
     super.dispose();
   }
 
+  Future<void> _resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      await showResetDialog(context, 'Password reset email sent');
+    } on FirebaseAuthException catch (e) {
+      await showErrorDialog(context, e.message ?? 'An error occurred');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,6 +212,25 @@ class _LoginViewState extends State<LoginView> {
                               ),
                             ),
                             SizedBox(height: 20.0),
+                            Center(
+                              child: TextButton(
+                                onPressed: () async {
+                                  final email = _email.text;
+                                  if (email.isEmpty) {
+                                    await showErrorDialog(context, 'Please enter your email to reset your password');
+                                  } else {
+                                    await _resetPassword(email);
+                                  }
+                                },
+                                child: Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

@@ -157,3 +157,40 @@ Future<bool> showDeleteDialog(BuildContext context) {
     },
   ).then((value) => value ?? false);
 }
+
+Future<void> showResetDialog(
+    BuildContext context,
+    String text,
+    ) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text(
+            'Reset Password',
+            style: TextStyle(
+              color: Color(0xff008080),
+            )
+        ),
+        content: Text(text,
+          style: TextStyle(
+            color: Color(0xff008080),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              'ok',
+              style: TextStyle(
+                color: Color(0xff008080),
+              ),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}

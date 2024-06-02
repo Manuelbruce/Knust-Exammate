@@ -151,7 +151,9 @@ class _TestViewState extends State<TestView> {
 
   Widget _buildQuestionView() {
     final question = _questions[_currentQuestionIndex];
-    final selectedOption = _selectedAnswers[_currentQuestionIndex];
+    final selectedOption = _selectedAnswers.isNotEmpty ? _selectedAnswers[_currentQuestionIndex] : null;
+
+    final answeredQuestionsCount = _selectedAnswers.length;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -223,7 +225,30 @@ class _TestViewState extends State<TestView> {
               ),
           ],
         ),
+        SizedBox(height: 16),
+        Card(
+          elevation: 4,
+          color: Color(0xff008080),
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              'Answered: $answeredQuestionsCount / ${_questions.length}',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NunitoSans',
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
+
+
+
 }
