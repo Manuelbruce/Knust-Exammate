@@ -33,7 +33,11 @@ class DBconnect {
         .replaceAll('#', '%23')
         .replaceAll('\$', '%24')
         .replaceAll('[', '%5B')
+        .replaceAll('±', '%5C')
+        .replaceAll('/', '%25')
+        .replaceAll('√', '%2D')
         .replaceAll(']', '%5D');
+
   }
 
   String decodeKey(String key) {
@@ -42,6 +46,9 @@ class DBconnect {
         .replaceAll('%23', '#')
         .replaceAll('%24', '\$')
         .replaceAll('%5B', '[')
+        .replaceAll('%5C', '±')
+        .replaceAll('%25', '/')
+        .replaceAll('%2D', '√')
         .replaceAll('%5D', ']');
   }
 

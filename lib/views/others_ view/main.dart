@@ -9,6 +9,7 @@ import 'package:knust_exammate/views/college_views/cofbuiltenviron_view.dart';
 import 'package:knust_exammate/views/college_views/cofengineering_view.dart';
 import 'package:knust_exammate/views/college_views/cofhandsc_view.dart';
 import 'package:knust_exammate/views/college_views/cofhealthsc_view.dart';
+import 'package:knust_exammate/views/others_%20view/history.dart';
 import 'package:knust_exammate/views/others_%20view/login_view.dart';
 import 'package:knust_exammate/views/others_%20view/score_view.dart';
 import 'package:knust_exammate/views/others_%20view/signup_view.dart';
@@ -25,11 +26,6 @@ import 'dart:convert';
 
 void main() async {
   var db= DBconnect();
-
-
-
-
-
 
 
   runApp(MaterialApp(
@@ -103,9 +99,11 @@ class MainAppView extends StatefulWidget {
 class _MainAppViewState extends State<MainAppView> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static  List<Widget> _widgetOptions = <Widget>[
     CollegeView(),
+    HistoryView(),
     ProfileView(),
+
 
   ];
   @override
@@ -140,6 +138,18 @@ class _MainAppViewState extends State<MainAppView> {
               height: 24.0,
             ),
             label: "Colleges",
+
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              'images/historywhite.png',
+              height: 24.0,
+            ),
+            icon: Image.asset(
+              'images/history.png',
+              height: 24.0,
+            ),
+            label: "History",
 
           ),
           BottomNavigationBarItem(

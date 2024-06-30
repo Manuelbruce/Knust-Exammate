@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:knust_exammate/utilities/db_connect.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import 'score_view.dart';
 
 class TestView extends StatefulWidget {
@@ -87,8 +89,19 @@ class _TestViewState extends State<TestView> {
     });
   }
 
-  void _finishTest() {
+  void _finishTest() async {
     int score = _calculateScore();
+
+    // Save test history
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> history = prefs.getStringList('testHistory') ?? [];
+    history.add(jsonEncode({
+      'course': widget.course,
+      'score': score,
+      'date': DateTime.now().toIso8601String(),
+    }));
+    await prefs.setStringList('testHistory', history);
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -96,7 +109,7 @@ class _TestViewState extends State<TestView> {
           course: widget.course,
           score: score,
           totalQuestions: _questions.length,
-          answers: _selectedAnswers, // Pass the correct type
+          answers: _selectedAnswers,
           questions: _questions,
           duration: widget.duration,
         ),
@@ -154,6 +167,7 @@ class _TestViewState extends State<TestView> {
     final selectedOption = _selectedAnswers.isNotEmpty ? _selectedAnswers[_currentQuestionIndex] : null;
 
     final answeredQuestionsCount = _selectedAnswers.length;
+    final unansweredQuestionsCount = _questions.length - answeredQuestionsCount;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -161,7 +175,7 @@ class _TestViewState extends State<TestView> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            question.title,
+            '${_currentQuestionIndex + 1}: ${question.title}',
             style: TextStyle(
               fontSize: 24,
               fontFamily: 'NunitoSans',
@@ -245,10 +259,27 @@ class _TestViewState extends State<TestView> {
             ),
           ),
         ),
+        SizedBox(height: 8),
+        Card(
+          elevation: 4,
+          color: Color(0xff008080),
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              'Unanswered: $unansweredQuestionsCount / ${_questions.length}',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NunitoSans',
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
-
-
-
 }
