@@ -98,6 +98,7 @@ class _TestViewState extends State<TestView> {
     history.add(jsonEncode({
       'course': widget.course,
       'score': score,
+      'totalQuestions': _questions.length, // Save total number of questions
       'date': DateTime.now().toIso8601String(),
     }));
     await prefs.setStringList('testHistory', history);
@@ -164,122 +165,124 @@ class _TestViewState extends State<TestView> {
 
   Widget _buildQuestionView() {
     final question = _questions[_currentQuestionIndex];
-    final selectedOption = _selectedAnswers.isNotEmpty ? _selectedAnswers[_currentQuestionIndex] : null;
+    final selectedOption = _selectedAnswers[_currentQuestionIndex];
 
     final answeredQuestionsCount = _selectedAnswers.length;
     final unansweredQuestionsCount = _questions.length - answeredQuestionsCount;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            '${_currentQuestionIndex + 1}: ${question.title}',
-            style: TextStyle(
-              fontSize: 24,
-              fontFamily: 'NunitoSans',
-              fontWeight: FontWeight.w900,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              '${_currentQuestionIndex + 1}: ${question.title}',
+              style: TextStyle(
+                fontSize: 24,
+                fontFamily: 'NunitoSans',
+                fontWeight: FontWeight.w900,
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            _formatTime(_remainingTimeInSeconds),
-            style: TextStyle(fontSize: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              _formatTime(_remainingTimeInSeconds),
+              style: TextStyle(fontSize: 20),
+            ),
           ),
-        ),
-        ...question.options.keys.map((option) {
-          final bool isSelected = selectedOption == option;
-          return GestureDetector(
-            onTap: () => _selectAnswer(_currentQuestionIndex, option),
-            child: Card(
-              color: isSelected ? Colors.teal : Colors.white,
-              child: ListTile(
-                title: Text(
-                  option,
-                  style: TextStyle(
-                    color: isSelected ? Colors.white : Colors.black,
-                    fontSize: 18,
-                    fontFamily: 'NunitoSans',
-                    fontWeight: FontWeight.bold,
+          ...question.options.keys.map((option) {
+            final bool isSelected = selectedOption == option;
+            return GestureDetector(
+              onTap: () => _selectAnswer(_currentQuestionIndex, option),
+              child: Card(
+                color: isSelected ? Colors.teal : Colors.white,
+                child: ListTile(
+                  title: Text(
+                    option,
+                    style: TextStyle(
+                      color: isSelected ? Colors.white : Colors.black,
+                      fontSize: 18,
+                      fontFamily: 'NunitoSans',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
+            );
+          }).toList(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (_currentQuestionIndex > 0)
+                ElevatedButton(
+                  onPressed: _previousQuestion,
+                  child: Text(
+                    'Previous',
+                    style: TextStyle(color: Color(0xff008080)),
+                  ),
+                ),
+              if (_currentQuestionIndex < _questions.length - 1)
+                ElevatedButton(
+                  onPressed: _nextQuestion,
+                  child: Text(
+                    'Next',
+                    style: TextStyle(color: Color(0xff008080)),
+                  ),
+                ),
+              if (_currentQuestionIndex == _questions.length - 1)
+                ElevatedButton(
+                  onPressed: _finishTest,
+                  child: Text(
+                    'Finish',
+                    style: TextStyle(color: Color(0xff008080)),
+                  ),
+                ),
+            ],
+          ),
+          SizedBox(height: 16),
+          Card(
+            elevation: 4,
+            color: Color(0xff008080),
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-          );
-        }).toList(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (_currentQuestionIndex > 0)
-              ElevatedButton(
-                onPressed: _previousQuestion,
-                child: Text(
-                  'Previous',
-                  style: TextStyle(color: Color(0xff008080)),
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Text(
+                'Answered: $answeredQuestionsCount / ${_questions.length}',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'NunitoSans',
+                  fontWeight: FontWeight.w900,
                 ),
-              ),
-            if (_currentQuestionIndex < _questions.length - 1)
-              ElevatedButton(
-                onPressed: _nextQuestion,
-                child: Text(
-                  'Next',
-                  style: TextStyle(color: Color(0xff008080)),
-                ),
-              ),
-            if (_currentQuestionIndex == _questions.length - 1)
-              ElevatedButton(
-                onPressed: _finishTest,
-                child: Text(
-                  'Finish',
-                  style: TextStyle(color: Color(0xff008080)),
-                ),
-              ),
-          ],
-        ),
-        SizedBox(height: 16),
-        Card(
-          elevation: 4,
-          color: Color(0xff008080),
-          margin: EdgeInsets.symmetric(horizontal: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Text(
-              'Answered: $answeredQuestionsCount / ${_questions.length}',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'NunitoSans',
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(height: 8),
-        Card(
-          elevation: 4,
-          color: Color(0xff008080),
-          margin: EdgeInsets.symmetric(horizontal: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Text(
-              'Unanswered: $unansweredQuestionsCount / ${_questions.length}',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'NunitoSans',
-                fontWeight: FontWeight.w900,
               ),
             ),
           ),
-        ),
-      ],
+          SizedBox(height: 8),
+          Card(
+            elevation: 4,
+            color: Color(0xff008080),
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Text(
+                'Unanswered: $unansweredQuestionsCount / ${_questions.length}',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'NunitoSans',
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -23,9 +23,9 @@ import 'package:knust_exammate/views/college_views/college_view.dart';
 import '../college_views/cofscience_view.dart';
 import 'dart:convert';
 
-
 void main() async {
   var db= DBconnect();
+
 
 
   runApp(MaterialApp(

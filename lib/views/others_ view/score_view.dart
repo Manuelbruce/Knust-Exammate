@@ -24,6 +24,8 @@ class ScoreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double scorePercent = (score / totalQuestions) * 100;
+
     return Scaffold(
       backgroundColor: Color(0xff008080),
       body: SafeArea(
@@ -64,9 +66,9 @@ class ScoreView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    ' $score / $totalQuestions',
+                    '${scorePercent.toStringAsFixed(0)}%',
                     style: TextStyle(
-                      fontSize: 60,
+                      fontSize: 100,
                       fontFamily: 'NunitoSans',
                       color: Color(0xff008080),
                       fontWeight: FontWeight.bold,

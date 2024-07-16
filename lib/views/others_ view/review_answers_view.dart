@@ -35,15 +35,27 @@ class ReviewAnswersView extends StatelessWidget {
                 itemCount: questions.length,
                 itemBuilder: (context, index) {
                   final question = questions[index];
-                  final correctOptionEntry = question.options.entries.firstWhere((entry) => entry.value, orElse: () => MapEntry('', false));
+                  final correctOptionEntry = question.options.entries
+                      .firstWhere((entry) => entry.value, orElse: () => MapEntry('', false));
                   final correctOption = correctOptionEntry.key;
                   final userAnswer = answers[index];
+                  final isCorrect = userAnswer == correctOption;
+
+                  Color cardColor;
+                  if (userAnswer == null) {
+                    cardColor = Colors.white;
+                  } else {
+                    cardColor = isCorrect
+                        ? Colors.lightGreen[100]!
+                        : Colors.red[100]!;
+                  }
 
                   return Card(
+                    color: cardColor,
                     margin: EdgeInsets.all(10.0),
                     child: ListTile(
                       title: Text(
-                        question.title ?? 'No Title',
+                        'Q${index + 1}: ${question.title ?? 'No Title'}',
                         style: TextStyle(
                           fontSize: 20,
                           fontFamily: 'NunitoSans',
@@ -53,7 +65,7 @@ class ReviewAnswersView extends StatelessWidget {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: question.options.keys.map((option) {
-                          final isCorrect = option == correctOption;
+                          final isOptionCorrect = option == correctOption;
                           final isUserAnswer = userAnswer != null && option == userAnswer;
 
                           return Padding(
@@ -61,8 +73,8 @@ class ReviewAnswersView extends StatelessWidget {
                             child: Text(
                               option,
                               style: TextStyle(
-                                color: isCorrect
-                                    ? Colors.teal
+                                color: isOptionCorrect
+                                    ? Colors.green
                                     : (isUserAnswer ? Colors.red : Colors.black),
                                 fontSize: 18,
                                 fontFamily: 'NunitoSans',

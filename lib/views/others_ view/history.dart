@@ -89,10 +89,10 @@ class _HistoryViewState extends State<HistoryView> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // Align column items to the start
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 20.0), // Adjust padding as needed
+              padding: const EdgeInsets.only(left: 16.0, top: 20.0),
               child: Text(
                 'Test History',
                 style: TextStyle(
@@ -121,8 +121,9 @@ class _HistoryViewState extends State<HistoryView> {
                 itemBuilder: (context, index) {
                   final historyItem = _testHistory[index];
                   final course = historyItem['course'] ?? 'No Course';
-                  final score = historyItem['score'] ?? '0';
-                  final totalQuestions = historyItem['totalQuestions'] ?? '0';
+                  final score = int.tryParse(historyItem['score'].toString()) ?? 0;
+                  final totalQuestions = int.tryParse(historyItem['totalQuestions'].toString()) ?? 0;
+                  final double scorePercent = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0.0;
 
                   return Card(
                     color: Color(0xff008080),
@@ -130,7 +131,6 @@ class _HistoryViewState extends State<HistoryView> {
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -151,14 +151,24 @@ class _HistoryViewState extends State<HistoryView> {
                               ),
                             ),
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                          Stack(
+                            alignment: Alignment.center,
                             children: [
+                              SizedBox(
+                                width: 60,
+                                height: 60,
+                                child: CircularProgressIndicator(
+                                  value: scorePercent / 100,
+                                  strokeWidth: 6,
+                                  backgroundColor:Color(0xff007070),
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                ),
+                              ),
                               Text(
-                                '$score%',
+                                '${scorePercent.toStringAsFixed(0)}%',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 30, // Larger font size for score
+                                  fontSize: 18,
                                   fontFamily: 'NunitoSans',
                                   fontWeight: FontWeight.bold,
                                 ),
