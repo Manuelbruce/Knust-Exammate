@@ -45,12 +45,37 @@ dependencies:
   image_picker: ^1.1.1
   http: ^1.2.1
   shared_preferences: ^2.0.15
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
 
 
+
+flutter_native_splash:
+  color: "#008080"
+  image: "assets/icon/splash_screen.png"
+  android: true
+  ios: true
+android_12:
+  color: "#008080"
+  image: "assets/icon/splash_screen.png"
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_launcher_icons: "^0.13.1"
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/icon/icon.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/icon/icon.png"
+    icon_size: 48 # min:48, max:256, default: 48
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -72,6 +97,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
+    - assets/icon/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

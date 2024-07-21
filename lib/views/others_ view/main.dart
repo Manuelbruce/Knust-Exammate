@@ -11,20 +11,19 @@ import 'package:knust_exammate/views/college_views/cofhandsc_view.dart';
 import 'package:knust_exammate/views/college_views/cofhealthsc_view.dart';
 import 'package:knust_exammate/views/others_%20view/history.dart';
 import 'package:knust_exammate/views/others_%20view/login_view.dart';
-import 'package:knust_exammate/views/others_%20view/score_view.dart';
 import 'package:knust_exammate/views/others_%20view/signup_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:knust_exammate/constants/routes.dart';
 import 'package:knust_exammate/utilities/show_error_dialog.dart';
 import 'package:knust_exammate/views/others_%20view/verify_email_view.dart';
-
 import 'package:knust_exammate/views/college_views/college_view.dart';
 import '../college_views/cofscience_view.dart';
 import 'dart:convert';
 
 void main() async {
   var db= DBconnect();
+
 
 
 
@@ -46,7 +45,6 @@ void main() async {
         profileRoute: (context) => const ProfileView(),
         collegeRoute: (context) => const CollegeView(),
         aboutpageRoute: (context) =>  const AboutPageView(),
-
       }
   ));
 }

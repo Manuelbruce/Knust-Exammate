@@ -102,7 +102,7 @@ class _CofAgricultureandNatureViewState extends State<CofAgricultureandNatureVie
                 ),
 
                 SizedBox(height: 20,),
-                Text('Programmes',
+                Text('Programs',
                   style: TextStyle(
                       fontFamily: 'NunitoSans',
                       fontSize: 30.0,

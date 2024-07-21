@@ -27,6 +27,14 @@ class DBconnect {
     return Uri.parse('$baseUrl/courses/$course/questions.json');
   }
 
+  Uri _getUserUrl(String uid) {
+    return Uri.parse('$baseUrl/users/$uid.json');
+  }
+
+  Uri _getUserNameUrl(String uid) {
+    return Uri.parse('$baseUrl/users/$uid/name.json');
+  }
+
   String encodeKey(String key) {
     return key
         .replaceAll('.', '%2E')
@@ -37,7 +45,6 @@ class DBconnect {
         .replaceAll('/', '%25')
         .replaceAll('√', '%2D')
         .replaceAll(']', '%5D');
-
   }
 
   String decodeKey(String key) {
@@ -68,7 +75,7 @@ class DBconnect {
       if (response.statusCode == 200) {
         print('Question added successfully: ${question.title}');
       } else {
-        print('Failed to add question: ${response.body}');
+        print('Failed to add question: ${response.statusCode} - ${response.body}');
       }
     } catch (e) {
       print('Error adding question: $e');
@@ -101,7 +108,7 @@ class DBconnect {
           throw Exception('Unexpected data format');
         }
       } else {
-        throw Exception('Failed to load questions');
+        throw Exception('Failed to load questions: ${response.statusCode} - ${response.body}');
       }
     } catch (e) {
       print('Error getting questions: $e');
@@ -119,5 +126,35 @@ class DBconnect {
     }
   }
 
+  // Method to update the user's name in the database
+  Future<void> updateUserName(String uid, String name) async {
+    final url = _getUserNameUrl(uid);
+    try {
+      final response = await http.put(url, body: json.encode(name));
+      if (response.statusCode == 200) {
+        print('User name updated successfully');
+      } else {
+        print('Failed to update user name: ${response.statusCode} - ${response.body}');
+      }
+    } catch (e) {
+      print('Error updating user name: $e');
+    }
+  }
 
+  // Method to retrieve the user's name from the database
+  Future<String?> getUserName(String uid) async {
+    final url = _getUserNameUrl(uid);
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return data as String?;
+      } else {
+        print('Failed to get user name: ${response.statusCode} - ${response.body}');
+      }
+    } catch (e) {
+      print('Error getting user name: $e');
+    }
+    return null;
+  }
 }

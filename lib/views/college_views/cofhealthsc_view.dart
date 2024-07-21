@@ -87,7 +87,7 @@ class _CofHealthSciencesViewState extends State<CofHealthSciencesView> {
                   ),
                 ),
                 SizedBox(height: 20,),
-                Text('Programmes',
+                Text('Programs',
                   style: TextStyle(
                       fontFamily: 'NunitoSans',
                       fontSize: 30.0,

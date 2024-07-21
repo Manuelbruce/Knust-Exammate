@@ -7,7 +7,7 @@ import 'package:knust_exammate/constants/routes.dart';
 import 'package:knust_exammate/utilities/show_error_dialog.dart';
 import 'package:knust_exammate/utilities/utils.dart';
 import 'package:knust_exammate/views/others_%20view/aboutpage_view.dart';
-
+import 'package:knust_exammate/utilities/db_connect.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -20,6 +20,24 @@ class _ProfileViewState extends State<ProfileView> {
   Uint8List? _image;
   final currentUser = FirebaseAuth.instance.currentUser!;
   String userName = "Your Name"; // Default name
+  final DBconnect _dbconnect = DBconnect(); // Create an instance of DBconnect
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  void _loadUserName() async {
+    try {
+      String? name = await _dbconnect.getUserName(currentUser.uid);
+      setState(() {
+        userName = name ?? userName;
+      });
+    } catch (e) {
+      showErrorDialog(context, "Error", "Unable to load name. Please try again later.");
+    }
+  }
 
   void selectImage() async {
     Uint8List img = await pickImage(ImageSource.gallery);
@@ -70,12 +88,49 @@ class _ProfileViewState extends State<ProfileView> {
               'Save',
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: () {
-              setState(() {
-                userName = newValue.isNotEmpty ? newValue : userName;
-              });
-              Navigator.of(context).pop();
+            onPressed: () async {
+              Navigator.of(context).pop(); // Close the dialog first
+              if (newValue.isNotEmpty) {
+                try {
+                  await _dbconnect.updateUserName(currentUser.uid, newValue);
+                  setState(() {
+                    userName = newValue;
+                  });
+                } catch (e) {
+                  showErrorDialog(context, "Error", "Unable to change name. Try again later.");
+                }
+              }
             },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showErrorDialog(BuildContext context, String title, String content) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
+        title: Text(
+          title,
+          style: TextStyle(
+            color: Color(0xff008080),
+          ),
+        ),
+        content: Text(
+          content,
+          style: TextStyle(
+            color: Color(0xff008080),
+          ),
+        ),
+        actions: [
+          TextButton(
+            child: Text(
+              'OK',
+              style: TextStyle(color: Color(0xff008080)),
+            ),
+            onPressed: () => Navigator.pop(context),
           ),
         ],
       ),
@@ -283,8 +338,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
               ),
-            ),
-            Padding(
+            ),            Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0),
               child: GestureDetector(
                 onTap: () {

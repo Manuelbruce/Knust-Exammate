@@ -23,15 +23,14 @@ class AboutPageView extends StatelessWidget {
                           builder: (context) => const ProfileView()
                       )
                       );
-                    }, icon: Icon(Icons.arrow_back,
-                      size: 30,),
+                    }, icon: const Icon(Icons.arrow_back, size: 30,),
                       style: IconButton.styleFrom(
                           foregroundColor: Colors.teal
                       ),
                     ),
                   ),
-                  SizedBox(width:3.5),
-                  Text("About",
+                  const SizedBox(width:3.5),
+                  const Text("About",
                     style: TextStyle(
                         fontFamily: 'NunitoSans',
                         fontSize:50.0,
@@ -46,13 +45,14 @@ class AboutPageView extends StatelessWidget {
                 height: 15,
               ),
               Container(
-                padding: EdgeInsets.all(9.0),
-                child: Text(
-                    'KNUST Exam mate is a mobile application platform that allows anyone to have access to passed questions , simulate examination conditions and track their progress.'
-                    ' With KNUST Exam Mate anyone can have access to various past questions from any course KNUST has to offer , whether  Engineering,'
-                    ' the sciences or the arts KNUST exam mate has got you covered.'
-                    ' Join several people who are testing themselves on various passed questions KNUST has to offer all on the KNUST Exam mate app.',
-                   style: TextStyle(
+                padding: const EdgeInsets.all(9.0),
+                child: const Text(
+                    'KNUST ExamMate is a comprehensive mobile application platform that provides access to a diverse range of practice tests from various courses offered at KNUST. Whether you are interested in Engineering, the Sciences, or the Arts, KNUST ExamMate caters to all your academic practice needs.'
+                'Our platform features an extensive collection of practice tests, allowing users to test their knowledge and understanding across multiple subject areas. With KNUST ExamMate, you can take timed practice tests, receive immediate feedback, and monitor your progress, ensuring a thorough and engaging learning experience.'
+                'Join a wide community of users who are enhancing their knowledge and skills through the numerous practice tests available on KNUST ExamMate. Our intuitive interface and powerful functionalities make it easy for anyone to access and benefit from our practice tests, regardless of their academic background or goals.'
+                'Experience the versatility and efficiency of KNUST ExamMate – your go-to solution for academic practice and self-assessment. Whether you\'re a student, a professional, or simply someone looking to expand your knowledge, KNUST ExamMate has got you covered.'
+                    ,
+                    style: TextStyle(
                      fontFamily: 'NunitoSans',
                      fontWeight: FontWeight.bold,
                      fontSize: 20

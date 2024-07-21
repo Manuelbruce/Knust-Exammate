@@ -11,19 +11,20 @@ class CofHumanitiesandSocailSciencesView extends StatefulWidget {
 
 class _CofHumanitiesandSocailSciencesViewState extends State<CofHumanitiesandSocailSciencesView> {
   final List<Map<String, dynamic>> _allUsers = [
-    {"name": "English", "courses": ["Principles of Management", "Data Structures", "Introduction to Programming with C++"]},
-    {"name": "Economics", "courses": ["Probability", "Statistics", "Risk Management"]},
-    {"name": "Culture and Tourism", "courses": ["Calculus", "Linear Algebra", "Abstract Algebra"]},
-    {"name": "French", "courses": ["Food Chemistry", "Food Safety", "Food Engineering"]},
-    {"name": "Akan", "courses": ["Ecology", "Environmental Policy", "Climate Science"]},
-    {"name": "Law", "courses": ["Visual Optics", "Ocular Disease", "Clinical Optometry"]},
-    {"name": "Akan", "courses": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry"]},
-    {"name": "Geography and Rural Development", "courses": ["IT Fundamentals", "Network Security", "Database Management"]},
-    {"name": "Social Work", "courses": ["Descriptive Statistics", "Inferential Statistics", "Statistical Computing"]},
-    {"name": "Religious Studies", "courses": ["Weather Analysis", "Climate Change", "Atmospheric Physics"]},
-    {"name": "History", "courses": ["Molecular Biology", "Genetics", "Proteomics"]},
-    {"name": "Business Administration", "courses": ["Quantum Chemistry", "Spectroscopy", "Chemical Kinetics"]},
-    {"name": "Political Studies", "courses": ["Quantum Chemistry", "Spectroscopy", "Chemical Kinetics"]},
+    {"name": "English", "courses": ["Communication Skills"]},
+    {"name": "Economics", "courses": ["Probability", "Statistics","Communication Skills", "Risk Management"]},
+    {"name": "Human Resource Management", "courses": ["Human Resource Planning", "Communication Skills", "Risk Management"]},
+    {"name": "Culture and Tourism", "courses": ["Communication Skills"]},
+    {"name": "French", "courses": ["Communication Skills"]},
+    {"name": "Akan", "courses": ["Communication Skills"]},
+    {"name": "Law", "courses": ["Communication Skills"]},
+    {"name": "Akan", "courses": ["Communication Skills"]},
+    {"name": "Geography and Rural Development", "courses": ["Communication Skills"]},
+    {"name": "Social Work", "courses": ["Communication Skills"]},
+    {"name": "Religious Studies", "courses": ["Communication Skills"]},
+    {"name": "History", "courses": ["Communication Skills"]},
+    {"name": "Business Administration", "courses": ["Communication Skills"]},
+    {"name": "Political Studies", "courses": ["Communication Skills"]},
   ];
 
   List<Map<String, dynamic>> _foundUsers = [];
@@ -106,7 +107,7 @@ class _CofHumanitiesandSocailSciencesViewState extends State<CofHumanitiesandSoc
                 ),
 
                 SizedBox(height: 20,),
-                Text('Programmes',
+                Text('Programs',
                   style: TextStyle(
                       fontFamily: 'NunitoSans',
                       fontSize: 30.0,

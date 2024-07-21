@@ -11,8 +11,8 @@ class CofEngineeringView extends StatefulWidget {
 
 class _CofEngineeringViewState extends State<CofEngineeringView> {
   final List<Map<String, dynamic>> _allUsers = [
-    {"name": "Computer Engineering", "courses": ["Principles of Management", "Data Structures", "Introduction to Programming with C++"]},
-    {"name": "Aerospace Engineering", "courses": ["Probability", "Statistics", "Risk Management"]},
+    {"name": "Computer Engineering", "courses": ["Environmental Studies","Introduction to IT","Electrical Engineering Technology","Basic Mechanics","Applied Electricity","Communication Skills"]},
+    {"name": "Aerospace Engineering", "courses": []},
     {"name": "Materials Engineering", "courses": ["Calculus", "Linear Algebra", "Abstract Algebra"]},
     {"name": "Petroleum Engineering", "courses": ["Food Chemistry", "Food Safety", "Food Engineering"]},
     {"name": "Telecommunication Engineering", "courses": ["Ecology", "Environmental Policy", "Climate Science"]},
@@ -89,7 +89,7 @@ class _CofEngineeringViewState extends State<CofEngineeringView> {
               ),
             ),
             SizedBox(height: 20,),
-            Text('Programmes',
+            Text('Programs',
               style: TextStyle(
                   fontFamily: 'NunitoSans',
                   fontSize: 30.0,

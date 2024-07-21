@@ -11,18 +11,18 @@ class CofScienceView extends StatefulWidget {
 
 class _CofScienceViewState extends State<CofScienceView> {
   final List<Map<String, dynamic>> _allUsers = [
-    {"name": "Computer Science", "courses": ["Introduction to Structured Program Design","Circuit Theory","Discrete Mathematics I","Information Systems", "Introductory Electronics", "Data Structures","Ecommerce", "Programming with C++", "Introductory Pure Mathematics", "Web-based Concepts and Development", "Object Oriented Programming with Java", "Communication Skills", "Probability and Statistics",  "Open Source Operating Systems", "Ethical and Legal Implication of Computing", "Linear and Numerical Algebra", "Elements of Economics",  "System Analysis and Design", "Database Concepts and Technologies","Human-Computer Interaction",   "Analogue and Digital Electronics", "Assembly Language", "Numerical Methods and Computation", "Programming with Visual Basic", "Mobile Applications", "Survey of Programming Languages", "Introduction to Artificial Intelligence","Computer Architecture", "Computer Graphics", "E-Commerce", "Real-time and Embedded Systems", "Research Method and IT Project","Literature in English", "Data Communications", "Operating Systems", "Principles of Management","Graph Theory and Its Applications", "Introduction to Software Engineering", "Expert Systems", "Computer Networks", "Introduction to Compilers", "Computer Security", "Principles of Management II"]},
-    {"name": "Actuarial Science", "courses": ["Probability", "Statistics", "Risk Management"]},
-    {"name": "Mathematics", "courses": ["Calculus", "Linear Algebra", "Abstract Algebra"]},
-    {"name": "Food Science and Technology", "courses": ["Food Chemistry", "Food Safety", "Food Engineering"]},
-    {"name": "Environmental Science", "courses": ["Ecology", "Environmental Policy", "Climate Science"]},
-    {"name": "Optometry", "courses": ["Visual Optics", "Ocular Disease", "Clinical Optometry"]},
-    {"name": "Chemistry", "courses": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry"]},
-    {"name": "Information Technology", "courses": ["IT Fundamentals", "Network Security", "Database Management"]},
-    {"name": "Statistics", "courses": ["Descriptive Statistics", "Inferential Statistics", "Statistical Computing"]},
-    {"name": "Meteorology and Climate Science", "courses": ["Weather Analysis", "Climate Change", "Atmospheric Physics"]},
-    {"name": "Biochemistry", "courses": ["Molecular Biology", "Genetics", "Proteomics"]},
-    {"name": "Theoretical and Applied Chemistry", "courses": ["Quantum Chemistry", "Spectroscopy", "Chemical Kinetics"]},
+    {"name": "Computer Science", "courses": ["Introduction to Structured Program Design","Circuit Theory","Discrete Mathematics I","Information Systems", "Introductory Electronics", "Data Structures","Ecommerce", "Programming with C++", "Introductory Pure Mathematics", "Web-based Concepts and Development", "Object Oriented Programming with Java", "Communication Skills", "Probability and Statistics",  "Open Source Operating Systems", "Ethical and Legal Implications of Computing", "Linear and Numerical Algebra", "Elements of Economics",  "System Analysis and Design", "Database Concepts and Technologies","Human-Computer Interaction", "Analogue and Digital Electronics", "Assembly Language", "Numerical Methods and Computation", "Programming with Visual Basic", "Mobile Applications", "Survey of Programming Languages", "Introduction to Artificial Intelligence","Computer Architecture", "Computer Graphics", "E-Commerce", "Real-Time and Embedded Systems", "Research Method and IT Project","Literature in English", "Data Communications", "Operating Systems", "Graph Theory and Its Applications", "Introduction to Software Engineering", "Expert Systems", "Computer Networks", "Introduction to Compilers", "Computer Security", "Operations Research","Principles of Management","Financial Accounting"]},
+    {"name": "Actuarial Science", "courses": ["Regression Analysis","Financial Accounting", "Literature in English", "Communication Skills","Programming with C++","Elements of Economics","Information Technology"]},
+    {"name": "Mathematics", "courses": [ "Linear and Numerical Algebra","Communication Skills","Calculus", "Linear Algebra", "Abstract Algebra"]},
+    {"name": "Food Science and Technology", "courses": ["Food Chemistry", "Communication Skills","Food Safety", "Food Engineering"]},
+    {"name": "Environmental Science", "courses": ["Ecology", "Environmental Policy", "Communication Skills","Climate Science"]},
+    {"name": "Optometry", "courses": ["Visual Optics", "Ocular Disease", "Communication Skills","Clinical Optometry"]},
+    {"name": "Chemistry", "courses": ["Organic Chemistry", "Inorganic Chemistry", "Communication Skills","Physical Chemistry"]},
+    {"name": "Information Technology", "courses": ["IT Fundamentals", "Network Security","Communication Skills", "Database Management"]},
+    {"name": "Statistics", "courses": ["Descriptive Statistics", "Inferential Statistics", "Communication Skills","Statistical Computing"]},
+    {"name": "Meteorology and Climate Science", "courses": ["Weather Analysis", "Climate Change", "Communication Skills","Atmospheric Physics"]},
+    {"name": "Biochemistry", "courses": ["Molecular Biology", "Communication Skills","Genetics", "Proteomics"]},
+    {"name": "Theoretical and Applied Chemistry", "courses": ["Quantum Chemistry", "Spectroscopy", "Communication Skills","Chemical Kinetics"]},
   ];
 
   List<Map<String, dynamic>> _foundUsers = [];
@@ -85,7 +85,7 @@ class _CofScienceViewState extends State<CofScienceView> {
             ),
             SizedBox(height: 20),
             Text(
-              'Programmes',
+              'Programs',
               style: TextStyle(
                 fontFamily: 'NunitoSans',
                 fontSize: 30.0,
