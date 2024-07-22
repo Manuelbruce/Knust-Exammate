@@ -51,13 +51,13 @@ dependencies:
 
 
 flutter_native_splash:
-  color: "#008080"
+  color: "#FFFFFF"
   image: "assets/icon/splash_screen.png"
   android: true
   ios: true
 
   android_12:
-    color: "#008080"
+    color: "#FFFFFF"
     image: "assets/icon/splash_screen.png"
 
 dev_dependencies:
