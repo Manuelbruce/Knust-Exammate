@@ -11,15 +11,15 @@ class CofAgricultureandNatureView extends StatefulWidget {
 
 class _CofAgricultureandNatureViewState extends State<CofAgricultureandNatureView> {
   final List<Map<String, dynamic>> _allUsers = [
-    {"name": "LandScape Design & Management", "courses": ["Principles of Management", "Data Structures", "Introduction to Programming with C++"]},
-    {"name": "Agricultural Biotechnology", "courses": ["Probability", "Statistics", "Risk Management"]},
-    {"name": "Agribusiness Management", "courses": ["Calculus", "Linear Algebra", "Abstract Algebra"]},
-    {"name": "Forest Resources Technology", "courses": ["Food Chemistry", "Food Safety", "Food Engineering"]},
-    {"name": "Aquaculture & Water Resources Management", "courses": ["Ecology", "Environmental Policy", "Climate Science"]},
-    {"name": "Dairy & Meat Science Technology", "courses": ["Visual Optics", "Ocular Disease", "Clinical Optometry"]},
-    {"name": "Agriculture", "courses": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry"]},
-    {"name": " Natural Resources Management", "courses": ["IT Fundamentals", "Network Security", "Database Management"]},
-    {"name": "Post Harvest Technology", "courses": ["Descriptive Statistics", "Inferential Statistics", "Statistical Computing"]},
+    {"name": "LandScape Design & Management", "courses": ["Communication Skills"]},
+    {"name": "Agricultural Biotechnology", "courses": ["Communication Skills"]},
+    {"name": "Agribusiness Management", "courses": ["Communication Skills"]},
+    {"name": "Forest Resources Technology", "courses": ["Communication Skills"]},
+    {"name": "Aquaculture & Water Resources Management", "courses": ["Communication Skills"]},
+    {"name": "Dairy & Meat Science Technology", "courses": ["Communication Skills"]},
+    {"name": "Agriculture", "courses": ["Communication Skills"]},
+    {"name": " Natural Resources Management", "courses": ["Communication Skills"]},
+    {"name": "Post Harvest Technology", "courses": ["Communication Skills"]},
   ];
 
   List<Map<String, dynamic>> _foundUsers = [];

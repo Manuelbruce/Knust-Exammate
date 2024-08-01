@@ -13,18 +13,18 @@ class CofHealthSciencesView extends StatefulWidget {
 class _CofHealthSciencesViewState extends State<CofHealthSciencesView> {
 
   final List<Map<String, dynamic>> _allUsers = [
-  {"name": "Medicine(Human Biology)", "courses": ["Principles of Management", "Data Structures", "Introduction to Programming with C++"]},
-{"name": "Nursing", "courses": ["Probability", "Statistics", "Risk Management"]},
-{"name": "Midwifery", "courses": ["Calculus", "Linear Algebra", "Abstract Algebra"]},
-{"name": "Emergency Nursing", "courses": ["Food Chemistry", "Food Safety", "Food Engineering"]},
-{"name": "Dental Surgery", "courses": ["Ecology", "Environmental Policy", "Climate Science"]},
-{"name": "Veterinary Medicine", "courses": ["Visual Optics", "Ocular Disease", "Clinical Optometry"]},
-{"name": "Pharmacy", "courses": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry"]},
-{"name": "Sonography", "courses": ["IT Fundamentals", "Network Security", "Database Management"]},
-{"name": "Herbal Medicine", "courses": ["Descriptive Statistics", "Inferential Statistics", "Statistical Computing"]},
-{"name": "Medical Laboratory Technology", "courses": ["Weather Analysis", "Climate Change", "Atmospheric Physics"]},
-{"name": "Disability & Rehabilitation Studies", "courses": ["Molecular Biology", "Genetics", "Proteomics"]},
-{"name": "Sports and Exercise Science", "courses": ["Quantum Chemistry", "Spectroscopy", "Chemical Kinetics"]},
+  {"name": "Medicine(Human Biology)", "courses": ["Communication Skills"]},
+{"name": "Nursing", "courses": ["Communication Skills"]},
+{"name": "Midwifery", "courses": ["Communication Skills"]},
+{"name": "Emergency Nursing", "courses": ["Communication Skills"]},
+{"name": "Dental Surgery", "courses": ["Communication Skills"]},
+{"name": "Veterinary Medicine", "courses": ["Communication Skills"]},
+{"name": "Pharmacy", "courses": ["Communication Skills"]},
+{"name": "Sonography", "courses": ["Communication Skills"]},
+{"name": "Herbal Medicine", "courses": ["Communication Skills"]},
+{"name": "Medical Laboratory Technology", "courses": ["Communication Skills"]},
+{"name": "Disability & Rehabilitation Studies", "courses": ["Communication Skills"]},
+{"name": "Sports and Exercise Science", "courses": ["Communication Skills"]},
   ];
 
   List<Map<String, dynamic>> _foundUsers = [];
@@ -71,7 +71,7 @@ class _CofHealthSciencesViewState extends State<CofHealthSciencesView> {
 
                       Image.asset(
                         'images/icons8-caduceus-100.png', // Adjust the path accordingly
-                        height: 50, // Adjust the height as needed
+                        height: 50,
                       ),
                       SizedBox(width:3.0),
                       Text('College of Health Sciences'

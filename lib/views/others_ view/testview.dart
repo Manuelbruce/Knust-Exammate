@@ -69,7 +69,11 @@ class _TestViewState extends State<TestView> {
 
   void _selectAnswer(int questionIndex, String option) {
     setState(() {
-      _selectedAnswers[questionIndex] = option;
+      if (_selectedAnswers[questionIndex] == option) {
+        _selectedAnswers.remove(questionIndex);
+      } else {
+        _selectedAnswers[questionIndex] = option;
+      }
     });
   }
 

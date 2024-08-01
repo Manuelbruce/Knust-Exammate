@@ -143,8 +143,7 @@ class DBconnect {
 
   // Method to retrieve the user's name from the database
   Future<String?> getUserName(String uid) async {
-    final url = _getUserNameUrl(uid);
-    try {
+    final url = _getUserNameUrl(uid); try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
