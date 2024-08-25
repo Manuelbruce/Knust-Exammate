@@ -13,7 +13,7 @@ class CofHealthSciencesView extends StatefulWidget {
 class _CofHealthSciencesViewState extends State<CofHealthSciencesView> {
 
   final List<Map<String, dynamic>> _allUsers = [
-  {"name": "Medicine(Human Biology)", "courses": ["Communication Skills"]},
+    {"name": "Medicine(Human Biology)", "courses": ["Communication Skills","Behavioral Sciences"]},
 {"name": "Nursing", "courses": ["Communication Skills"]},
 {"name": "Midwifery", "courses": ["Communication Skills"]},
 {"name": "Emergency Nursing", "courses": ["Communication Skills"]},

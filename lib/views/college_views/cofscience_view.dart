@@ -23,6 +23,7 @@ class _CofScienceViewState extends State<CofScienceView> {
     {"name": "Meteorology and Climate Science", "courses": ["Weather Analysis", "Climate Change", "Communication Skills","Atmospheric Physics"]},
     {"name": "Biochemistry", "courses": ["Molecular Biology", "Communication Skills","Genetics", "Proteomics"]},
     {"name": "Theoretical and Applied Chemistry", "courses": ["Quantum Chemistry", "Spectroscopy", "Communication Skills","Chemical Kinetics"]},
+    {"name": "Physics", "courses": ["Communication Skills",]},
   ];
 
   List<Map<String, dynamic>> _foundUsers = [];

@@ -21,7 +21,7 @@ class _CofBuiltEnvironmentViewState extends State<CofBuiltEnvironmentView> {
     {"name": "Industrial Art", "courses": ["Communication Skills"]},
     {"name": "Integrated Rural Art & Industry", "courses": ["Communication Skills"]},
     {"name": "Construction Technology & Management", "courses": ["Communication Skills"]},
-    {"name": "Quantity Surveying snd Construction Economics", "courses": ["Communication Skills"]},
+    {"name": "Quantity Surveying snd Construction Economics", "courses": ["Communication Skills","Contract Administration and Professional Practice",]},
     {"name": "Publishing Studies", "courses": ["Communication Skills"]},
   ];
 
